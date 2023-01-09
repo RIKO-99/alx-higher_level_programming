@@ -1,16 +1,20 @@
 #!/usr/bin/python3
 """
-    This is my class Mylist that inherits from list
+Contains the MyList class
 """
 
-class Mylist(list):
+
+class MyList(list):
+    """
+    Args:
+        list: The super class
+    """
     def __init__(self):
         super().__init__()
 
     def print_sorted(self):
-    """
-    prints the sorted list
+        """
+        prints the sorted list
+        """
 
-    """
-    print(sorted(self))
-
+        print(sorted(self))
