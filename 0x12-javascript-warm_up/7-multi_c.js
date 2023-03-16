@@ -5,5 +5,5 @@ if (isNaN(Math.trunc(process.argv[2]))) {
 } else {
   for (let i = 0; i < process.argv[2]; i++) {
     console.log('C is fun');
-	  }
-	  }
+  }
+}
