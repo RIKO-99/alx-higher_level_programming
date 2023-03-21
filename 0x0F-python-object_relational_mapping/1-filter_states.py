@@ -6,7 +6,7 @@ import sys
 
 if __name__ == "__main__":
     try:
-        connection = MySQLdb.connect(
+        conn = MySQLdb.connect(
             host="localhost",
             user=sys.argv[1],
             passwd=sys.argv[2],
@@ -18,10 +18,10 @@ if __name__ == "__main__":
     cur = connection.cursor()
     try:
         cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY states.id")
-        rows = cur.fetchall()
-        for row in rows:
+        query_rows = cur.fetchall()
+        for row in query_rows:
             print(row)
     except MySQLdb.Error:
         print("execution failed")
     cur.close()
-    connection.close()
+    conn.close()
