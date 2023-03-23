@@ -17,7 +17,8 @@ if __name__ == "__main__":
         print("error connecting")
     cur = conn.cursor()
     try:
-        cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY states.id")
+        cur.execute(
+         "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY states.id")
         query_rows = cur.fetchall()
         for row in query_rows:
             print(row)
