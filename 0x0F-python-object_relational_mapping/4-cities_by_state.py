@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 
-""" This module takes in an argument and displays all
-values in ths states table in the database hbtn_0e_0_usa
-where name matches the argument
+""" This module lists all the cities from the database
+hbtn_0e_4_usa
 """
 
 if __name__ == '__main__':
@@ -15,8 +14,11 @@ if __name__ == '__main__':
                          db=sys.argv[3])
     cur = db.cursor()
 
-    cur.execute("SELECT * FROM states WHERE BINARY name =  '{}'\
-            ORDER BY states.id".format(sys.argv[4]))
+    cur.execute("SELECT cities.id, cities.name, states.name\
+                FROM cities\
+                INNER JOIN states\
+                ON cities.state_id = states.id\
+                ORDER BY cities.id")
 
     rows = cur.fetchall()
 
