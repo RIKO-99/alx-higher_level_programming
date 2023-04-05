@@ -1,11 +1,3 @@
 #!/bin/bash
-
-# Get URL from user input
-read -p "Enter URL: " url
-
-# Send request and get response size in bytes
-response=$(curl -s -w "%{size_download}" -o /dev/null $url)
-
-# Display response size
-echo "Response size in bytes: $response"
-
+# send a request to an URL with curl and displays the size of the body of the response
+curl -s -w '%{size_download}' -o /dev/null "$1"
