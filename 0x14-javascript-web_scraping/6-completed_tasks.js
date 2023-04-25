@@ -1,24 +1,38 @@
 #!/usr/bin/node
 
-// a script to count items form an api call
-
+// Import the `request` module. The `request` module provides functions for making HTTP requests.
 const request = require('request');
-const url = process.argv[2];
-request(url, (err, res, body) => {
-  if (err) console.error(err);
-  const tasks = JSON.parse(body);
 
-//initialize an empty object. 
-  const dict = {};
+// Make an HTTP GET request to the URL specified by the first command-line argument.
+request(process.argv[2], (err, response, body) => {
+  // Check if there was an error.
+  if (err) {
+    // If there was an error, log it to the console and exit.
+    console.error(err);
+    return;
+  }
 
-//iterate over the array.
-  for (let i = 0; i < tasks.length; i++) {
-    if (!dict[tasks[i].userId]) {
-      dict[tasks[i].userId] = 0;
-    }
-    if (tasks[i].completed === true) {
-      dict[tasks[i].userId] += 1;
+  // Parse the JSON response body.
+  const json = JSON.parse(body);
+
+  // Initialize an empty object to store the completed tasks for each user.
+  const resp = {};
+
+  // Iterate over the JSON array.
+  for (let i = 0; i < json.length; i++) {
+    // Check if the current task is completed.
+    if (json[i].completed === true) {
+      // If the current task is completed, check if the user ID exists in the `resp` object.
+      if (resp[json[i].userId] === undefined) {
+        // If the user ID does not exist in the `resp` object, initialize the count to 0.
+        resp[json[i].userId] = 0;
+      }
+
+      // Increment the count for the current user.
+      resp[json[i].userId]++;
     }
   }
-  console.log(dict);
+
+  // Log the `resp` object.
+  console.log(resp);
 });
